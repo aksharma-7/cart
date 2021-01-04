@@ -1,42 +1,12 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-
-    increaseQuantity = () => {
-    //    console.log('this.state', this.state) 
-       // setState form 1
-    //    this.setState({
-    //        qty: this.state.qty + 1
-    //    });
-
-    //setState form 2 - if previous state required use this
-       this.setState((prevState) => {
-           return {
-               qty: prevState.qty + 1
-           }
-       });
-    }
-
-    decreaseQuantity = () => {
-        const { qty } = this.state;
-
-        if(qty == 0) {
-            return;
-        }
-
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty - 1
-            }
-        });
-    }
-
     render () {
         console.log('this.prop', this.props)
         const {price, title, qty} = this.props.product;
+        const { product, onIncreaseQuantity, onDecreaseQuantity } = this.props
         return (
             <div className="cart-item">
-                {this.props.jsx}
                 <div className="left-block">
                     <img style= { styles.image } />
                 </div>
@@ -50,13 +20,13 @@ class CartItem extends React.Component {
                             alt="increase" 
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/992/992651.svg"
-                            onClick={this.increaseQuantity} 
+                            onClick={() => onIncreaseQuantity(product)} 
                         />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://www.flaticon.com/svg/static/icons/svg/992/992683.svg" 
-                            onClick={this.decreaseQuantity} 
+                            onClick={() => onDecreaseQuantity(product)} 
                         />
                         <img 
                             alt="delete" 
